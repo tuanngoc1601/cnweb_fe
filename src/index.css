@@ -1,0 +1,27 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter'), url('./assets/fonts/static/Inter-Medium.ttf') format('truetype');
+  font-weight: normal; /* hoặc 'bold' cho phiên bản đậm */
+  font-style: normal; /* hoặc 'italic' cho phiên bản nghiêng */
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: local('Inter'), url('./assets/fonts/static/Inter-Regular.ttf') format('truetype');
+  font-weight: normal; /* hoặc 'bold' cho phiên bản đậm */
+  font-style: normal; /* hoặc 'italic' cho phiên bản nghiêng */
+}
+
+html, body {
+  margin: 0;
+  font-family: 'Inter', sans-serif !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
