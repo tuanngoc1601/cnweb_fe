@@ -13,10 +13,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 const Footer = () => {
     return (
         <Box
-            sx={{
-                backgroundColor: "#000000",
-                color: "#ffffff",
-            }}
+            className="w-full backdrop-blur-md shadow-inner shadow-gray-300"
         >
             <Container>
                 <Grid container direction="row">

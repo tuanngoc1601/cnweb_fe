@@ -1,41 +1,23 @@
 import React from "react";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
 import SignUpForm from "../component/Auth/SignUpForm";
-import slide_image from "../assets/images/slide_image.png";
+import { LoginBg, Logo } from "../assets";
 
-const Signup = () => {
+const SignUp = () => {
     return (
-        <Container>
-            <Grid
-                container
-                direction="row"
-                justifyContent="center"
-                alignItems="center"
-                sx={{ my: 2 }}
-            >
-                <Grid item xs={7}>
-                    <Box
-                        sx={{
-                            backgroundImage: `url(${slide_image})`,
-                            backgroundPosition: "center",
-                            backgroundRepeat: "no-repeat",
-                            backgroundSize: "contain",
-                            height: "650px",
-                            width: "90%",
-                            margin: "0 auto",
-                        }}
-                    ></Box>
-                </Grid>
-                <Grid item xs={5}>
-                    <Box>
-                        <SignUpForm />
-                    </Box>
-                </Grid>
-            </Grid>
-        </Container>
+        <div className="w-screen h-screen relative overflow-hidden flex">
+            <img
+                src={LoginBg}
+                className="w-full h-full object-cover absolute top-0 left-0"
+                alt="bg-login"
+            />
+            <div className="flex flex-col items-center justify-center bg-lightOverlay w-[80%] md:w-508 h-full z-10 backdrop-blur-md p-4 px-4 py-12 gap-6">
+                <div className="flex items-center justify-center gap-4 w-full">
+                    <img src={Logo} className="w-40" alt="logo" />
+                </div>
+                <SignUpForm />
+            </div>
+        </div>
     );
 };
 
-export default Signup;
+export default SignUp;

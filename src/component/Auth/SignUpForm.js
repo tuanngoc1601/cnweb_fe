@@ -1,22 +1,19 @@
 import * as React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 import { authRequestApi } from "../../redux/requests";
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
-const defaultTheme = createTheme();
+import { motion } from "framer-motion";
+import { IoIosMail } from "react-icons/io";
+import { RiLockPasswordFill } from "react-icons/ri";
+import {
+    FaEye,
+    FaEyeSlash,
+    FaAddressBook,
+    FaPhone,
+    FaTransgenderAlt,
+} from "react-icons/fa";
+import { MdConfirmationNumber } from "react-icons/md";
+import { FaUser, FaCircleUser } from "react-icons/fa6";
 
 export default function SignUp() {
     const [formData, setFormData] = React.useState({
@@ -30,6 +27,7 @@ export default function SignUp() {
         password: "",
         confirmPassword: "",
     });
+    const [showPassword, setShowPassword] = React.useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -45,183 +43,165 @@ export default function SignUp() {
     };
 
     return (
-        <ThemeProvider theme={defaultTheme}>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                    }}
-                >
-                    <Box
-                        component="form"
-                        noValidate
-                        onSubmit={handleSubmit}
-                        sx={{ mt: 3 }}
+        <form
+            className="w-full flex flex-col items-center justify-center gap-4 px-4 md:px-12 py-4"
+            onSubmit={handleSubmit}
+        >
+            <div className="flex items-center justify-center gap-4 bg-white rounded-md w-full px-4 py-1">
+                <span>
+                    <IoIosMail className="text-xl" />
+                </span>
+                <input
+                    type="email"
+                    placeholder="Email"
+                    className="w-full h-full bg-transparent text-headingColor text-lg border-none outline-none px-2 py-2"
+                    value={formData.email}
+                    onChange={(e) => handleChangeSignupForm(e, "email")}
+                />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+                <div className="flex items-center justify-center gap-4 bg-white rounded-md w-full px-4 py-1">
+                    <span>
+                        <FaUser className="text-xl" />
+                    </span>
+                    <input
+                        type="text"
+                        placeholder="First Name"
+                        className="w-full h-full bg-transparent text-headingColor text-lg border-none outline-none px-2 py-2"
+                        value={formData.firstName}
+                        onChange={(e) => handleChangeSignupForm(e, "firstName")}
+                    />
+                </div>
+                <div className="flex items-center justify-center gap-4 bg-white rounded-md w-full px-4 py-1">
+                    <span>
+                        <FaUser className="text-xl" />
+                    </span>
+                    <input
+                        type="text"
+                        placeholder="Last Name"
+                        className="w-full h-full bg-transparent text-headingColor text-lg border-none outline-none px-2 py-2"
+                        value={formData.lastName}
+                        onChange={(e) => handleChangeSignupForm(e, "lastName")}
+                    />
+                </div>
+            </div>
+            <div className="flex items-center justify-center gap-4 bg-white rounded-md w-full px-4 py-1">
+                <span>
+                    <FaCircleUser className="text-xl" />
+                </span>
+                <input
+                    type="text"
+                    placeholder="Username"
+                    className="w-full h-full bg-transparent text-headingColor text-lg border-none outline-none px-2 py-2"
+                    value={formData.username}
+                    onChange={(e) => handleChangeSignupForm(e, "username")}
+                />
+            </div>
+            <div className="flex items-center justify-center gap-4 bg-white rounded-md w-full px-4 py-1">
+                <span>
+                    <FaAddressBook className="text-xl" />
+                </span>
+                <input
+                    type="text"
+                    placeholder="Address"
+                    className="w-full h-full bg-transparent text-headingColor text-lg border-none outline-none px-2 py-2"
+                    value={formData.address}
+                    onChange={(e) => handleChangeSignupForm(e, "address")}
+                />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+                <div className="flex items-center justify-center gap-4 bg-white rounded-md w-full px-4 py-1">
+                    <span>
+                        <FaPhone className="text-xl" />
+                    </span>
+                    <input
+                        type="text"
+                        placeholder="Phone"
+                        className="w-full h-full bg-transparent text-headingColor text-lg border-none outline-none px-2 py-2"
+                        value={formData.phone}
+                        onChange={(e) => handleChangeSignupForm(e, "phone")}
+                    />
+                </div>
+                <div className="flex items-center justify-center gap-4 bg-white rounded-md w-full px-4 py-1">
+                    <span>
+                        <FaTransgenderAlt className="text-xl" />
+                    </span>
+                    <select
+                        id="gender"
+                        value={formData.gender}
+                        required
+                        className="w-full h-full bg-transparent text-headingColor text-lg border-none outline-none px-2 py-2"
+                        onChange={(e) => handleChangeSignupForm(e, "gender")}
                     >
-                        <Grid container spacing={2}>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    autoComplete="email"
-                                    onChange={(e) =>
-                                        handleChangeSignupForm(e, "email")
-                                    }
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    autoComplete="given-name"
-                                    name="firstName"
-                                    required
-                                    fullWidth
-                                    id="firstName"
-                                    label="First Name"
-                                    onChange={(e) =>
-                                        handleChangeSignupForm(e, "firstName")
-                                    }
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="lastName"
-                                    label="Last Name"
-                                    name="lastName"
-                                    autoComplete="family-name"
-                                    onChange={(e) =>
-                                        handleChangeSignupForm(e, "lastName")
-                                    }
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="username"
-                                    label="Username"
-                                    name="username"
-                                    autoComplete="username"
-                                    onChange={(e) =>
-                                        handleChangeSignupForm(e, "username")
-                                    }
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="address"
-                                    label="Address"
-                                    name="address"
-                                    autoComplete="address"
-                                    onChange={(e) =>
-                                        handleChangeSignupForm(e, "address")
-                                    }
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    autoComplete="phone"
-                                    name="phone"
-                                    required
-                                    fullWidth
-                                    id="phone"
-                                    label="Phone Number"
-                                    onChange={(e) =>
-                                        handleChangeSignupForm(e, "phone")
-                                    }
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <FormControl fullWidth>
-                                    <InputLabel id="gender">
-                                        Gender *
-                                    </InputLabel>
-                                    <Select
-                                        required
-                                        labelId="gender"
-                                        id="gender"
-                                        value={formData.gender}
-                                        label="Gender"
-                                        onChange={(e) =>
-                                            handleChangeSignupForm(e, "gender")
-                                        }
-                                    >
-                                        <MenuItem value={"Male"}>Male</MenuItem>
-                                        <MenuItem value={"Female"}>
-                                            Female
-                                        </MenuItem>
-                                        <MenuItem value={"Other"}>
-                                            Other
-                                        </MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    name="password"
-                                    label="Password"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="new-password"
-                                    onChange={(e) =>
-                                        handleChangeSignupForm(e, "password")
-                                    }
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    name="confirmPassword"
-                                    label="Confirm Password"
-                                    type="password"
-                                    id="confirmPassword"
-                                    autoComplete="new-password"
-                                    onChange={(e) =>
-                                        handleChangeSignupForm(
-                                            e,
-                                            "confirmPassword"
-                                        )
-                                    }
-                                />
-                            </Grid>
-                        </Grid>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Create an account
-                        </Button>
-                        <Grid container justifyContent="flex-end">
-                            <Grid item>
-                                <Link
-                                    to={"/login"}
-                                    variant="body2"
-                                    style={{
-                                        fontSize: "0.875rem",
-                                        color: "#1976d2",
-                                    }}
-                                >
-                                    Already have an account? Sign in
-                                </Link>
-                            </Grid>
-                        </Grid>
-                    </Box>
-                </Box>
-            </Container>
-        </ThemeProvider>
+                        <option value="" disabled className="hidden">
+                            Gender
+                        </option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div className="flex items-center justify-center gap-4 bg-white rounded-md w-full px-4 py-1">
+                <span>
+                    <RiLockPasswordFill className="text-xl" />
+                </span>
+                <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    className="w-full h-full bg-transparent text-headingColor text-lg border-none outline-none px-2 py-2"
+                    value={formData.password}
+                    onChange={(e) => handleChangeSignupForm(e, "password")}
+                />
+                {showPassword ? (
+                    <span>
+                        <FaEye
+                            className="text-xl"
+                            onClick={() => setShowPassword(false)}
+                            role="button"
+                        />
+                    </span>
+                ) : (
+                    <span>
+                        <FaEyeSlash
+                            className="text-xl"
+                            onClick={() => setShowPassword(true)}
+                            role="button"
+                        />
+                    </span>
+                )}
+            </div>
+            <div className="flex items-center justify-center gap-4 bg-white rounded-md w-full px-4 py-1">
+                <span>
+                    <MdConfirmationNumber className="text-xl" />
+                </span>
+                <input
+                    type="password"
+                    placeholder="Confirm Password"
+                    className="w-full h-full bg-transparent text-headingColor text-lg border-none outline-none px-2 py-2"
+                    value={formData.confirmPassword}
+                    onChange={(e) =>
+                        handleChangeSignupForm(e, "confirmPassword")
+                    }
+                />
+            </div>
+            <p className="text-md">
+                I have an account{" "}
+                <Link to={"/login"}>
+                    <motion.button
+                        className="underline text-red-400"
+                        whileTap={{ scale: 0.95 }}
+                    >
+                        Login here
+                    </motion.button>
+                </Link>
+            </p>
+            <button
+                type="submit"
+                className="w-full text-lg text-white bg-red-300 capitalize hover:bg-red-400 transition-all duration-150 rounded px-4 py-2"
+            >
+                SignUp
+            </button>
+        </form>
     );
 }
