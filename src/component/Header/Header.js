@@ -8,16 +8,17 @@ import { Logo, AvatarUser } from "../../assets";
 import { isActiveStyles, isNotActiveStyles } from "../../utils/styles";
 import { authRequestApi } from "../../redux/requests";
 
-const Header = () => {
+const Header = ({ setIsOpenCart }) => {
     const user = useSelector((state) => state.auth.login.currentUser);
+    const cart = useSelector((state) => state.cart.carts.data);
     const [isMenu, setIsMenu] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleLogout = () => {
         authRequestApi.logoutUser(dispatch, navigate);
-    }
-    
+    };
+
     return (
         <header className="w-full fixed backdrop-blur-md z-50 insert-x-0 top-0 flex items-center justify-between px-12 md:px-20 py-6 shadow-sm">
             <NavLink
@@ -61,13 +62,18 @@ const Header = () => {
                         About Us
                     </NavLink>
                 </ul>
-                <motion.div className="relative cursor-pointer">
+                <motion.div
+                    className="relative cursor-pointer"
+                    onClick={() => setIsOpenCart(true)}
+                >
                     <FaShoppingCart className="text-3xl text-textColor" />
-                    <div className="h-6 w-6 rounded-full bg-red-500 flex items-center justify-center absolute -top-4 -right-1">
-                        <p className="text-primary text-base font-semibold">
-                            2
-                        </p>
-                    </div>
+                    {cart && cart.length > 0 && (
+                        <div className="h-6 w-6 rounded-full bg-red-500 flex items-center justify-center absolute -top-4 -right-1">
+                            <p className="text-primary text-base font-semibold">
+                                {cart.length}
+                            </p>
+                        </div>
+                    )}
                 </motion.div>
                 {user ? (
                     <>
@@ -110,7 +116,10 @@ const Header = () => {
                                         Orders
                                     </Link>
                                     <hr />
-                                    <motion.div onClick={handleLogout} className="group flex items-center justify-center px-3 py-2 rounded-md bg-gray-100 hover:bg-gray-200 gap-3">
+                                    <motion.div
+                                        onClick={handleLogout}
+                                        className="group flex items-center justify-center px-3 py-2 rounded-md bg-gray-100 hover:bg-gray-200 gap-3"
+                                    >
                                         <MdLogout className="text-2xl text-textColor group-hover::text-headingColor" />
                                         <p className="text-textColor text-xl group-hover:text-headingColor">
                                             Sign Out

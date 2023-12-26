@@ -5,51 +5,51 @@ const authSlice = createSlice({
     initialState: {
         login: {
             currentUser: null,
-            pennding: false,
+            pendding: false,
             error: false,
         },
         register: {
-            pennding: false,
+            pendding: false,
             error: false,
             success: false,
         },
     },
     reducers: {
         loginStart: (state) => {
-            state.login.pennding = true;
+            state.login.pendding = true;
         },
         loginSuccess: (state, action) => {
-            state.login.pennding = false;
+            state.login.pendding = false;
             state.login.currentUser = action.payload;
             state.login.error = false;
         },
         loginFailed: (state) => {
-            state.login.pennding = false;
+            state.login.pendding = false;
             state.login.error = true;
         },
         registerStart: (state) => {
-            state.register.pennding = true;
+            state.register.pendding = true;
         },
         registerSuccess: (state) => {
-            state.register.pennding = false;
+            state.register.pendding = false;
             state.register.error = false;
             state.register.success = true;
         },
         registerFailed: (state) => {
-            state.register.pennding = false;
+            state.register.pendding = false;
             state.register.error = true;
             state.register.success = false;
         },
         logoutStart: (state) => {
-            state.login.pennding = true;
+            state.login.pendding = true;
         },
         logoutSuccess: (state) => {
-            state.login.pennding = false;
+            state.login.pendding = false;
             state.login.currentUser = null;
             state.login.error = false;
         },
         logoutFailed: (state) => {
-            state.login.pennding = false;
+            state.login.pendding = false;
             state.login.error = true;
         },
         refreshUserSuccess: (state, action) => {

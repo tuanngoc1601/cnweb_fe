@@ -5,21 +5,21 @@ const productSlice = createSlice({
     initialState: {
         products: {
             data: null,
-            pennding: false,
+            pendding: false,
             error: false,
         },
     },
     reducers: {
         getProductStart: (state) => {
-            state.products.pennding = true;
+            state.products.pendding = true;
         },
         getProductSuccess: (state, action) => {
-            state.products.pennding = false;
+            state.products.pendding = false;
             state.products.data = action.payload;
             state.products.error = false;
         },
         getProductFailed: (state) => {
-            state.products.pennding = false;
+            state.products.pendding = false;
             state.products.error = true;
         },
     },
