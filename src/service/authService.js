@@ -1,9 +1,8 @@
 import { createAxiosBaseUrl, createAxiosClient } from "../axios";
-import { logoutSuccess } from "../redux/authSlice";
 
 const axiosClient = createAxiosBaseUrl();
 
-const axiosClientLogout = createAxiosClient(logoutSuccess);
+const axiosClientToken = createAxiosClient();
 
 export const handleLoginService = (user) => {
     return axiosClient.post("/api/v1/auth/login", user);
@@ -14,5 +13,5 @@ export const handleRegisterService = (user) => {
 };
 
 export const handleLogoutService = () => {
-    return axiosClientLogout.post("/api/v1/auth/logout");
+    return axiosClientToken.post("/api/v1/auth/logout");
 };

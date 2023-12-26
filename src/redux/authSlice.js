@@ -52,6 +52,9 @@ const authSlice = createSlice({
             state.login.pennding = false;
             state.login.error = true;
         },
+        refreshUserSuccess: (state, action) => {
+            state.login.currentUser = action.payload;
+        },
     },
 });
 
@@ -65,6 +68,7 @@ export const {
     logoutStart,
     logoutSuccess,
     logoutFailed,
+    refreshUserSuccess,
 } = authSlice.actions;
 
 export default authSlice.reducer;

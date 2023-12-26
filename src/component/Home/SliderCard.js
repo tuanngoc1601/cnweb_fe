@@ -4,6 +4,8 @@ import { HiCurrencyRupee } from "react-icons/hi2";
 import { IoBasket } from "react-icons/io5";
 
 const SliderCard = ({ data }) => {
+    const sentToCart = () => {};
+
     return (
         <div className="bg-white hover:drop-shadow-lg backdrop-blur-md rounded-xl flex items-center justify-between relative px-4 py-2 w-full md:w-340 md:min-w-350 gap-3">
             <img
@@ -13,13 +15,16 @@ const SliderCard = ({ data }) => {
             />
             <div className="relative pt-12">
                 <p className="text-xl text-headingColor font-semibold">
-                    {data.product_name}
+                    {data.name}
                 </p>
                 <p className="text-lg font-semibold text-red-500 flex items-center justify-center gap-1">
                     <HiCurrencyRupee className="text-red-500" />{" "}
-                    {parseFloat(data.product_price).toFixed(2)}
+                    {parseFloat(data.price).toFixed(2)}
                 </p>
-                <motion.div className="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center absolute -top-4 right-2 cursor-pointer">
+                <motion.div
+                    className="w-8 h-8 rounded-full bg-red-500 flex items-center justify-center absolute -top-4 right-2 cursor-pointer"
+                    onClick={sentToCart}
+                >
                     <IoBasket className="text-2xl text-primary" />
                 </motion.div>
             </div>

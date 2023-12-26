@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { statuses, products } from "../../utils/styles";
+import { statuses } from "../../utils/styles";
 import { motion } from "framer-motion";
 import { IoFastFood } from "react-icons/io5";
 import SliderCard from "./SliderCard";
+import { useSelector } from "react-redux";
 
 const FilterSection = () => {
-    const [category, setCategory] = useState("fruits");
+    const products = useSelector((state) => state.product.products.data);
+    const [category, setCategory] = useState("Fruits");
     return (
         <motion.div className="w-full flex items-start justify-start flex-col">
             <div className="w-full flex items-center justify-between">
@@ -31,7 +33,7 @@ const FilterSection = () => {
             <div className="w-full flex items-center justify-evenly flex-wrap gap-2 mt-12">
                 {products &&
                     products
-                        .filter((data) => data.product_category === category)
+                        .filter((data) => data["Category.name"] === category)
                         .map((data, i) => (
                             <SliderCard key={i} data={data} index={i} />
                         ))}

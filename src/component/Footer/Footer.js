@@ -31,7 +31,7 @@ const Footer = () => {
                                     alignItems: "center",
                                     padding: "5px 15px",
                                     mt: "3px",
-                                    border: "1px solid #ffffff",
+                                    border: "1px solid #000000",
                                 }}
                             >
                                 <InputBase
@@ -41,13 +41,13 @@ const Footer = () => {
                                     }}
                                     sx={{
                                         "& input": {
-                                            color: "white",
+                                            color: "black",
                                         },
                                     }}
                                 />
                                 <SendIcon
                                     sx={{
-                                        color: "#ffffff",
+                                        color: "#000000",
                                         lineHeight: "100%",
                                         padding: "4px",
                                         ml: 1,

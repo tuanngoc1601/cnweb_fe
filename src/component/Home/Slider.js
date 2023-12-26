@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import "../../assets/css/swiperStyles.css";
 import "swiper/css/bundle";
-import { fruits } from "../../utils/styles";
+// import { fruits } from "../../utils/styles";
 import SliderCard from "./SliderCard";
 
 const Slider = () => {
+    const products = useSelector((state) => state.product.products.data);
+    const [fruits, setFruits] = useState(null);
+
+    useEffect(() => {
+        const fruitsData = products?.filter((data) => data["Category.name"] === "Fruits");
+        setFruits(fruitsData);
+    }, [products]);
+    
     return (
         <div className="w-full pt-10">
             <Swiper
