@@ -17,3 +17,9 @@ export const handleUpdateCartService = (userId, productId, type) => {
         params: { productId: productId, type: type },
     });
 };
+
+export const handleDeleteCartItemService = (userId, productId) => {
+    return axiosClientCarts.delete(`/api/v1/cart/deleteCartItem/${userId}`, {
+        data: { productId: productId },
+    });
+};

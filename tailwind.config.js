@@ -47,6 +47,10 @@ module.exports = {
         "2xl": "1536px",
       },
       colors: {
+        buttonBg: "#4f46e5",
+        iconColor: "#9CA3AF",
+        textCheckout: "#111827",
+        secondary: "#D1D5DB",
         navActive: "#B511B8",
         headingColor: "#2e2e2e",
         textColor: "#515151",

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { cartService } from "../../service";
 import { cartRequestApi } from "../../redux/requests";
@@ -21,6 +22,7 @@ const Cart = ({ setIsOpenCart }) => {
             setTotal(tot);
         }
     }, [cart]);
+
     return (
         <motion.div
             initial={{ opacity: 0, x: 30 }}
@@ -63,8 +65,13 @@ const Cart = ({ setIsOpenCart }) => {
                                 </p>
                                 <p className="text-3xl text-orange-500 font-semibold flex items-center justify-center gap-1">
                                     <HiCurrencyRupee className="text-primary" />
-                                    {total}
+                                    {parseFloat(total).toFixed(2)}
                                 </p>
+                                <Link to={"/cart/checkout"}>
+                                    <button className="px-4 py-2 bg-orange-500 text-white rounded-lg">
+                                        Order
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     </>
