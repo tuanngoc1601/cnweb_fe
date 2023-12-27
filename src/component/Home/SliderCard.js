@@ -1,10 +1,18 @@
 import React from "react";
+import { cartService } from "../../service";
+import { cartRequestApi } from "../../redux/requests";
 import { motion } from "framer-motion";
 import { HiCurrencyRupee } from "react-icons/hi2";
 import { IoBasket } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
 
 const SliderCard = ({ data }) => {
-    const sentToCart = () => {};
+    const user = useSelector((state) => state.auth.login.currentUser);
+    const dispatch = useDispatch();
+    const sentToCart = async () => {
+        await cartService.handleAddToCartService(user?.id, data.id);
+        cartRequestApi.getAllCarts(user?.id, dispatch);
+    };
 
     return (
         <div className="bg-white hover:drop-shadow-lg backdrop-blur-md rounded-xl flex items-center justify-between relative px-4 py-2 w-full md:w-340 md:min-w-350 gap-3">
