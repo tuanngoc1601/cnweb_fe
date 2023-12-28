@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Header from "../component/Header/Header";
 import Footer from "../component/Footer/Footer";
-import { cartService } from "../service";
+import { cartService, orderService } from "../service";
 import { cartRequestApi } from "../redux/requests";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
@@ -12,6 +13,8 @@ const Checkout = () => {
     const cart = useSelector((state) => state.cart.carts.data);
     const [total, setTotal] = useState(0);
     const [subTotal, setSubTotal] = useState(0);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         let tot = 0;
@@ -34,6 +37,17 @@ const Checkout = () => {
         const previouState = { ...cardInfo };
         previouState[type] = e.target.value;
         setCardInfo(previouState);
+    };
+
+    const handleSubmitOrder = async () => {
+        const orderDetails = {
+            address: user?.address,
+            total: total,
+            cart: cart,
+        }
+        await orderService.handleOrderSubmitService(user?.id, orderDetails);
+        cartRequestApi.getAllCarts(user?.id, dispatch);
+        navigate("/cart/payment-success");
     };
 
     return (
@@ -172,6 +186,7 @@ const Checkout = () => {
                         <div className="px-6 py-6">
                             <button
                                 className="w-full py-3 bg-buttonBg rounded-lg text-white text-xl"
+                                onClick={handleSubmitOrder}
                             >
                                 Confirm order
                             </button>
