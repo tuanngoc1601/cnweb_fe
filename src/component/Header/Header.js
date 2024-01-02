@@ -11,6 +11,7 @@ import { authRequestApi } from "../../redux/requests";
 const Header = ({ setIsOpenCart }) => {
     const user = useSelector((state) => state.auth.login.currentUser);
     const cart = useSelector((state) => state.cart.carts.data);
+    const categories = useSelector((state) => state.product.categories.data);
     const [isMenu, setIsMenu] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -44,6 +45,19 @@ const Header = ({ setIsOpenCart }) => {
                         to={"/menu"}
                     >
                         Menu
+                        <div className="absolute hidden group-hover:block bg-gray-800 text-white shadow-lg py-2 px-4">
+                            {categories &&
+                                categories.length > 0 &&
+                                categories.map((category, index) => (
+                                    <NavLink
+                                        key={index}
+                                        to={`/categories/${category.id}`}
+                                        className="block hover:text-gray-300"
+                                    >
+                                        {category.name}
+                                    </NavLink>
+                                ))}
+                        </div>
                     </NavLink>
                     <NavLink
                         className={({ isActive }) =>

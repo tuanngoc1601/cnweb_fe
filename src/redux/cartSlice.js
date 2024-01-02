@@ -1,14 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+    carts: {
+        data: null,
+        pendding: false,
+        error: false,
+    },
+};
+
 const cartSlice = createSlice({
     name: "cart",
-    initialState: {
-        carts: {
-            data: null,
-            pendding: false,
-            error: false,
-        },
-    },
+    initialState,
     reducers: {
         getAllCartStart: (state) => {
             state.carts.pendding = true;
@@ -22,13 +24,15 @@ const cartSlice = createSlice({
             state.carts.pendding = false;
             state.carts.error = true;
         },
+        resetCartStateRedux: () => initialState,
     },
 });
 
 export const {
     getAllCartStart,
     getAllCartSuccess,
-    getAllCartFailed
+    getAllCartFailed,
+    resetCartStateRedux,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

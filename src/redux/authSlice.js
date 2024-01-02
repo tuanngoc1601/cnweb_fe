@@ -1,19 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+    login: {
+        currentUser: null,
+        pendding: false,
+        error: false,
+    },
+    register: {
+        pendding: false,
+        error: false,
+        success: false,
+    },
+}
+
 const authSlice = createSlice({
     name: "auth",
-    initialState: {
-        login: {
-            currentUser: null,
-            pendding: false,
-            error: false,
-        },
-        register: {
-            pendding: false,
-            error: false,
-            success: false,
-        },
-    },
+    initialState,
     reducers: {
         loginStart: (state) => {
             state.login.pendding = true;
@@ -55,6 +57,7 @@ const authSlice = createSlice({
         refreshUserSuccess: (state, action) => {
             state.login.currentUser = action.payload;
         },
+        resetAuthStateRedux: () => initialState,
     },
 });
 
@@ -69,6 +72,7 @@ export const {
     logoutSuccess,
     logoutFailed,
     refreshUserSuccess,
+    resetAuthStateRedux,
 } = authSlice.actions;
 
 export default authSlice.reducer;

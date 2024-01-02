@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./page/Login";
 import Signup from "./page/Signup";
 import Home from "./page/Home";
+import Category from "./page/Category";
 import Checkout from "./page/Checkout";
 import About from "./page/About";
 import PaymentSuccess from "./page/PaymentSuccess";
@@ -14,6 +15,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/sign-up" element={<Signup />} />
                 <Route exact path="/" element={<Home />} />
+                <Route path="/categories/:categoryId" element={<Category />} />
                 <Route path="/cart/checkout" element={<Checkout />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/cart/payment-success" element={<PaymentSuccess />} />

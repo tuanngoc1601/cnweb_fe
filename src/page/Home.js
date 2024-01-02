@@ -15,6 +15,7 @@ const Home = () => {
 
     useEffect(() => {
         productRequestApi.getAllProducts(dispatch);
+        productRequestApi.getAllCategories(dispatch);
         if(user) {
             const userId = user.id;
             cartRequestApi.getAllCarts(userId, dispatch);
