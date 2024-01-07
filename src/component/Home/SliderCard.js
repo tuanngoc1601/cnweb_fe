@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { cartService } from "../../service";
 import { cartRequestApi } from "../../redux/requests";
 import { motion } from "framer-motion";
@@ -15,12 +16,14 @@ const SliderCard = ({ data }) => {
     };
 
     return (
-        <div className="bg-white hover:drop-shadow-lg backdrop-blur-md rounded-xl flex items-center justify-between relative px-4 py-2 w-full md:w-340 md:min-w-350 gap-3">
-            <img
-                src={data.imageURL}
-                alt=""
-                className="w-40 h-40 object-contain"
-            />
+        <div className="bg-white hover:drop-shadow-lg backdrop-blur-md rounded-xl flex items-center justify-between cursor-pointer relative px-4 py-2 w-full md:w-340 md:min-w-350 gap-3">
+            <Link to={`/products/${data.id}`}>
+                <img
+                    src={data.imageURL}
+                    alt=""
+                    className="w-40 h-40 object-contain"
+                />
+            </Link>
             <div className="relative pt-12">
                 <p className="text-xl text-headingColor font-semibold">
                     {data.name}

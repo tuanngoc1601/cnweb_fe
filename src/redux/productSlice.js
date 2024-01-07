@@ -11,7 +11,12 @@ const initialState = {
         pendding: false,
         error: false,
     },
-}
+    productDetail: {
+        data: null,
+        pendding: false,
+        error: false,
+    },
+};
 
 const productSlice = createSlice({
     name: "product",
@@ -41,6 +46,17 @@ const productSlice = createSlice({
             state.categories.pendding = false;
             state.categories.error = true;
         },
+        getProductDetailStart: (state) => {
+            state.productDetail.pendding = true;
+        },
+        getProductDetailSuccess: (state, action) => {
+            state.productDetail.pendding = false;
+            state.productDetail.data = action.payload;
+            state.productDetail.error = false;
+        },
+        getProductDetailFailed: (state) => {
+            state.productDetail.error = true;
+        },
         resetProductStateRedux: () => initialState,
     },
 });
@@ -52,6 +68,9 @@ export const {
     getCategoriesStart,
     getCategoriesSuccess,
     getCategoriesFailed,
+    getProductDetailStart,
+    getProductDetailSuccess,
+    getProductDetailFailed,
     resetProductStateRedux,
 } = productSlice.actions;
 

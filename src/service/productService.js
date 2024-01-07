@@ -9,3 +9,9 @@ export const handleGetAllProductsService = () => {
 export const handleGetAllCategoriesService = () => {
     return axiosClientProducts.get("/api/v1/product/getAllCategories");
 };
+
+export const handleGetProductByIdService = (productId) => {
+    return axiosClientProducts.get(
+        `/api/v1/product/getProductById/${productId}`
+    );
+};

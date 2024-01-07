@@ -3,6 +3,8 @@ import authReducer from "./authSlice";
 import productReducer from "./productSlice";
 import cartReducer from "./cartSlice";
 import categoryReducer from "./categorySlice";
+import reviewReducer from "./reviewSlice";
+
 import {
     persistStore,
     persistReducer,
@@ -26,6 +28,7 @@ const rootReducer = combineReducers({
     product: productReducer,
     cart: cartReducer,
     category: categoryReducer,
+    review: reviewReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
