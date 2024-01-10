@@ -8,6 +8,7 @@ import Checkout from "./page/Checkout";
 import About from "./page/About";
 import PaymentSuccess from "./page/PaymentSuccess";
 import FootDetail from "./page/FootDetail";
+import Dashboard from "./page/admin/Dashboard";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/cart/payment-success" element={<PaymentSuccess />} />
                 <Route path="/products/:productId" element={<FootDetail />} />
+                <Route path="/dashboard/*" element={<Dashboard />} />
             </Routes>
         </div>
     );

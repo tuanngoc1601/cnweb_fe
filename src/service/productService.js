@@ -15,3 +15,16 @@ export const handleGetProductByIdService = (productId) => {
         `/api/v1/product/getProductById/${productId}`
     );
 };
+
+export const handlePostNewProductService = (newProduct) => {
+    return axiosClientProducts.post(
+        "/api/v1/product/postNewProduct",
+        newProduct
+    );
+};
+
+export const handleDeleteProductService = (productId) => {
+    return axiosClientProducts.delete("/api/v1/product/deleteProduct", {
+        data: { productId: productId },
+    });
+};

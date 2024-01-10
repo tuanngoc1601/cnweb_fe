@@ -22,3 +22,7 @@ code {
 select:required:invalid {
   color: #a9a9a9;
 }
+
+.MuiPaper-root {
+  width: 100%;
+}
