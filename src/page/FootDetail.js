@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Rating from "@mui/material/Rating";
 import {
     cartRequestApi,
     productRequestApi,
@@ -10,6 +11,7 @@ import { cartService } from "../service";
 import Header from "../component/Header/Header";
 import Footer from "../component/Footer/Footer";
 import CommentModal from "../component/Home/CommentModal";
+import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import { FaStar } from "react-icons/fa";
 
 const FootDetail = () => {
@@ -119,11 +121,15 @@ const CommentItem = ({ data }) => {
             <h3 className="text-xl">{data["User.username"]}</h3>
             <div className="flex items-center justify-start my-2 gap-x-8">
                 <div className="flex justify-start items-center gap-2">
-                    <FaStar className="text-xl text-red-500" />
-                    <FaStar className="text-xl text-red-500" />
-                    <FaStar className="text-xl text-red-500" />
-                    <FaStar className="text-xl text-red-500" />
-                    <FaStar className="text-xl text-zinc-500" />
+                    <Rating
+                        value={data.rating}
+                        readOnly
+                        sx={{
+                            color: "#EF4444",
+                        }}
+                        icon={<StarRoundedIcon />}
+                        emptyIcon={<StarRoundedIcon />}
+                    />
                 </div>
                 <span>Date: {data?.review_date}</span>
             </div>

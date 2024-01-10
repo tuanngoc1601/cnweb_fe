@@ -19,6 +19,8 @@ const CommentModal = ({ open, handleClose }) => {
     const dispatch = useDispatch();
 
     const handlePostComment = async () => {
+        setRating(0);
+        setComment("");
         handleClose();
         const postReview = {
             user_id: user?.id,
