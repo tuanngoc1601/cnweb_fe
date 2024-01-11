@@ -54,6 +54,7 @@ module.exports = {
         navActive: "#B511B8",
         headingColor: "#2e2e2e",
         textColor: "#515151",
+        textError: "#6b7280",
         cartNumBg: "#e80013",
         primary: "#f5f3f3",
         cardOverlay: "rgba(256,256,256,0.4)",

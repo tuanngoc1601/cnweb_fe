@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Header from "../component/Header/Header";
 import Footer from "../component/Footer/Footer";
+import Cart from "../component/Home/Cart";
+import { EmptyCart } from "../assets";
 import { cartService, orderService } from "../service";
 import { cartRequestApi } from "../redux/requests";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +13,7 @@ import { MdDelete } from "react-icons/md";
 const Checkout = () => {
     const user = useSelector((state) => state.auth.login.currentUser);
     const cart = useSelector((state) => state.cart.carts.data);
+    const [isOpenCart, setIsOpenCart] = useState(false);
     const [total, setTotal] = useState(0);
     const [subTotal, setSubTotal] = useState(0);
     const dispatch = useDispatch();
@@ -23,7 +26,10 @@ const Checkout = () => {
                 tot = tot + data["Product.price"] * data.quantity;
             });
             setSubTotal(tot);
-            setTotal(tot + 10.52);
+            if (cart.length > 0) {
+                setTotal(tot + 10.52);
+            }
+            setTotal(tot);
         }
     }, [cart]);
 
@@ -44,7 +50,7 @@ const Checkout = () => {
             address: user?.address,
             total: total,
             cart: cart,
-        }
+        };
         await orderService.handleOrderSubmitService(user?.id, orderDetails);
         cartRequestApi.getAllCarts(user?.id, dispatch);
         navigate("/cart/payment-success");
@@ -52,7 +58,7 @@ const Checkout = () => {
 
     return (
         <div className="w-full min-h-screen flex items-center justify-start flex-col bg-primary">
-            <Header />
+            <Header setIsOpenCart={setIsOpenCart} />
             <div className="w-full flex flex-row items-start justify-center mt-40 px-6 md:px-24 2xl:px-96 gap-12 pb-24">
                 <div className="w-1/2 p-2 px-4">
                     <h3 className="text-xl tracking-wide text-textCheckout font-semibold">
@@ -153,11 +159,19 @@ const Checkout = () => {
                     </h3>
                     <div className="w-full bg-white border rounded-xl mt-4 divide-y">
                         <div className="w-full p-2 divide-y">
-                            {cart &&
-                                cart.length > 0 &&
+                            {cart.length > 0 ? (
                                 cart.map((item, index) => (
                                     <OrderItem key={index} data={item} />
-                                ))}
+                                ))
+                            ) : (
+                                <div className="w-full flex justify-center items-center py-10">
+                                    <img
+                                        src={EmptyCart}
+                                        alt=""
+                                        className="w-60"
+                                    />
+                                </div>
+                            )}
                         </div>
                         <div className="p-2 divide-y">
                             <div className="flex flex-col px-4 py-2 gap-6">
@@ -167,14 +181,18 @@ const Checkout = () => {
                                         ${parseFloat(subTotal).toFixed(2)}
                                     </span>
                                 </p>
-                                <p className="flex justify-between items-center text-lg">
-                                    <span>Shipping</span>
-                                    <span>$5.00</span>
-                                </p>
-                                <p className="flex justify-between items-center text-lg">
-                                    <span>Taxes</span>
-                                    <span>$5.52</span>
-                                </p>
+                                {cart.length > 0 && (
+                                    <>
+                                        <p className="flex justify-between items-center text-lg">
+                                            <span>Shipping</span>
+                                            <span>$5.00</span>
+                                        </p>
+                                        <p className="flex justify-between items-center text-lg">
+                                            <span>Taxes</span>
+                                            <span>$5.52</span>
+                                        </p>
+                                    </>
+                                )}
                             </div>
                             <div className="px-4 py-2">
                                 <p className="flex justify-between items-center text-xl font-semibold my-4">
@@ -185,8 +203,9 @@ const Checkout = () => {
                         </div>
                         <div className="px-6 py-6">
                             <button
-                                className="w-full py-3 bg-buttonBg rounded-lg text-white text-xl"
+                                className="w-full py-3 bg-buttonBg rounded-lg text-white text-xl disabled:opacity-50"
                                 onClick={handleSubmitOrder}
+                                disabled={cart.length === 0}
                             >
                                 Confirm order
                             </button>
@@ -195,6 +214,7 @@ const Checkout = () => {
                 </div>
             </div>
             <Footer />
+            {isOpenCart && <Cart setIsOpenCart={setIsOpenCart} />}
         </div>
     );
 };

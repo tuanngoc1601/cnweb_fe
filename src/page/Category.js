@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { categoryRequestApi } from "../redux/requests";
 import Header from "../component/Header/Header";
 import Footer from "../component/Footer/Footer";
+import Cart from "../component/Home/Cart";
 import SliderCard from "../component/Home/SliderCard";
 import { IoMdSearch } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 const Category = () => {
     const { categoryId } = useParams();
     const [searchTerm, setSearchTerm] = useState("");
+    const [isOpenCart, setIsOpenCart] = useState(false);
     const products = useSelector((state) => state.category.categories.data);
     const categories = useSelector((state) => state.product.categories.data);
     const categoryName = categories.find(
@@ -38,7 +40,7 @@ const Category = () => {
 
     return (
         <div className="w-full min-h-screen flex items-center justify-start flex-col bg-primary">
-            <Header />
+            <Header setIsOpenCart={setIsOpenCart} />
             <div className="w-full flex flex-col items-start justify-center mt-40 px-6 md:px-24 2xl:px-96 gap-12 pb-24">
                 <div className="flex flex-row items-center justify-start gap-6">
                     <span className="text-3xl">{categoryName}</span>
@@ -70,6 +72,7 @@ const Category = () => {
                 </div>
             </div>
             <Footer />
+            {isOpenCart && <Cart setIsOpenCart={setIsOpenCart} />}
         </div>
     );
 };

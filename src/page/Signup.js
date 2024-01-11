@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import SignUpForm from "../component/Auth/SignUpForm";
 import { LoginBg, Logo } from "../assets";
 
 const SignUp = () => {
+    const navigate = useNavigate();
+    const user = useSelector((state) => state.auth.login.currentUser);
+
+    useEffect(() => {
+        if (user) {
+            navigate("/");
+        }
+    }, []);
+
     return (
         <div className="w-screen h-screen relative overflow-hidden flex">
             <img

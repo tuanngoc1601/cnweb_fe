@@ -10,6 +10,7 @@ import {
 import { cartService } from "../service";
 import Header from "../component/Header/Header";
 import Footer from "../component/Footer/Footer";
+import Cart from "../component/Home/Cart";
 import CommentModal from "../component/Home/CommentModal";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import { FaStar } from "react-icons/fa";
@@ -22,6 +23,7 @@ const FootDetail = () => {
         (state) => state.product.productDetail.data
     );
     const reviews = useSelector((state) => state.review.reviews.data);
+    const [isOpenCart, setIsOpenCart] = useState(false);
     const [open, setOpen] = useState(false);
 
     const handleOpenModal = () => {
@@ -44,7 +46,7 @@ const FootDetail = () => {
 
     return (
         <div className="w-full min-h-screen flex items-center justify-start flex-col bg-primary">
-            <Header />
+            <Header setIsOpenCart={setIsOpenCart} />
             <div className="w-full flex flex-col items-start justify-center mt-40 px-6 md:px-24 2xl:px-96 gap-12 pb-24 divide-y">
                 <div className="w-full flex flex-row">
                     <div className="w-1/2 flex justify-center items-center">
@@ -111,6 +113,7 @@ const FootDetail = () => {
                 </div>
             </div>
             <Footer />
+            {isOpenCart && <Cart setIsOpenCart={setIsOpenCart} />}
         </div>
     );
 };

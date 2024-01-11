@@ -9,6 +9,7 @@ import About from "./page/About";
 import PaymentSuccess from "./page/PaymentSuccess";
 import FootDetail from "./page/FootDetail";
 import Dashboard from "./page/admin/Dashboard";
+import NotFound404 from "./page/NotFound404";
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/cart/payment-success" element={<PaymentSuccess />} />
                 <Route path="/products/:productId" element={<FootDetail />} />
                 <Route path="/dashboard/*" element={<Dashboard />} />
+                <Route path="/*" element={<NotFound404 />} />
             </Routes>
         </div>
     );

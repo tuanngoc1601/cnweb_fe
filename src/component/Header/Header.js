@@ -111,12 +111,14 @@ const Header = ({ setIsOpenCart }) => {
                                     onMouseLeave={() => setIsMenu(false)}
                                     className="px-6 py-4 w-48 bg-white backdrop-blur-md rounded-md shadow-md absolute top-12 right-0 flex flex-col gap-4"
                                 >
-                                    <Link
-                                        to={"/dashboard/home"}
-                                        className="hover:text-red-500 text-xl text-textColor "
-                                    >
-                                        Dashboard
-                                    </Link>
+                                    {user?.is_admin ? (
+                                        <Link
+                                            to={"/dashboard/home"}
+                                            className="hover:text-red-500 text-xl text-textColor "
+                                        >
+                                            Dashboard
+                                        </Link>
+                                    ) : null}
                                     <Link
                                         to={"/profile"}
                                         className="hover:text-red-500 text-xl text-textColor "

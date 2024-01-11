@@ -1,13 +1,22 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { motion } from "framer-motion";
+import { authRequestApi } from "../../redux/requests";
+import { AvatarUser } from "../../assets";
 import { IoMdSearch } from "react-icons/io";
 import { BsToggles2, BsFillBellFill } from "react-icons/bs";
-import { AvatarUser } from "../../assets";
 import { MdLogout } from "react-icons/md";
 
 const DBHeader = () => {
     const user = useSelector((state) => state.auth.login.currentUser);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleLogout = () => {
+        authRequestApi.logoutUser(dispatch, navigate);
+    }
+
     return (
         <div className="w-full flex items-center justify-between px-8 gap-3">
             <p className="text-2xl text-headingColor">
@@ -38,7 +47,10 @@ const DBHeader = () => {
                             referrerPolicy="no-referrer"
                         ></motion.img>
                     </div>
-                    <motion.div className="w-10 h-10 rounded-md cursor-pointer bg-lightOverlay backdrop-blur-md shadow-md flex items-center justify-center">
+                    <motion.div
+                        className="w-10 h-10 rounded-md cursor-pointer bg-lightOverlay backdrop-blur-md shadow-md flex items-center justify-center"
+                        onClick={handleLogout}
+                    >
                         <MdLogout className="text-gray-400 text-xl" />
                     </motion.div>
                 </div>
